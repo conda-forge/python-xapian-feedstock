@@ -1,3 +1,5 @@
+build_number_decrement:
+- '1000'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
@@ -13,8 +15,14 @@ pin_run_as_build:
   zlib:
     max_pin: x.x
 python:
-- '3.5'
+- '3.6'
 xapian_core:
 - 1.4.7
+zip_keys:
+- - cxx_compiler
+  - channel_sources
+  - channel_targets
+  - docker_image
+  - build_number_decrement
 zlib:
 - '1.2'
