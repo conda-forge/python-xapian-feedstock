@@ -21,7 +21,7 @@ requirements:
     - python
     - pip
     - sphinx  # TODO: this shouldn't be needed, but there's no way to disable it in configure
-    - xapian-core {{ xapian_core }}
+    - xapian-core {{ version }}
     - zlib
 
   run:
