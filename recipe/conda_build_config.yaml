@@ -1,5 +1,0 @@
-xapian_core: 1.4.9
-pin_run_as_build:
-    xapian-core:
-        min_pin: x.x.x
-        max_pin: x.x.x
