@@ -1,5 +1,5 @@
 {% set name = "python-xapian" %}
-{% set version = "1.4.7" %}
+{% set version = "1.4.10" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://oligarchy.co.uk/xapian/{{ version }}/xapian-bindings-{{ version }}.tar.xz
-  sha256: 4519751376dc5b59893b812495e6004fd80eb4a10970829aede71a35264b4e6a
+  sha256: 53abebe8b4d594c246afd94f7dcb33a987c1d207a33beb02e9b08acad92b1d7f
 
 build:
-  number: 1
+  number: 0
   skip: True  # [win]
 
 requirements:
@@ -21,7 +21,7 @@ requirements:
     - python
     - pip
     - sphinx  # TODO: this shouldn't be needed, but there's no way to disable it in configure
-    - xapian-core {{ xapian_core }}
+    - xapian-core {{ version }}
     - zlib
 
   run:
