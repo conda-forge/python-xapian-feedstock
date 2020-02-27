@@ -26,5 +26,5 @@ LDFLAGS=${LDFLAGS} \
     $PYFLAG \
     --prefix=${PREFIX}
 
-make
+make -j ${CPU_COUNT}
 make install prefix=${PREFIX}
