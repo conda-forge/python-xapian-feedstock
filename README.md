@@ -1,5 +1,5 @@
-About xapian
-============
+About python-xapian
+===================
 
 Home: http://xapian.org
 
@@ -7,7 +7,7 @@ Package license: GPL-2.0+
 
 Feedstock license: BSD 3-Clause
 
-Summary: C++ Core and Python Bindings for the Xapian Open Source Search Engine Library.
+Summary: Python bindings for the Xapian Search Engine Library.
 
 Xapian is an Open Source search engine library which allows developers
 to add advanced indexing and search facilities to their own applications.
@@ -33,17 +33,59 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux</td>
+              <td>linux_python2.7</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=5995&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/python-xapian-feedstock?branchName=master&jobName=linux&configuration=linux_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/python-xapian-feedstock?branchName=master&jobName=linux&configuration=linux_python2.7" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx</td>
+              <td>linux_python3.6</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=5995&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/python-xapian-feedstock?branchName=master&jobName=osx&configuration=osx_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/python-xapian-feedstock?branchName=master&jobName=linux&configuration=linux_python3.6" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_python3.7</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=5995&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/python-xapian-feedstock?branchName=master&jobName=linux&configuration=linux_python3.7" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>linux_python3.8</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=5995&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/python-xapian-feedstock?branchName=master&jobName=linux&configuration=linux_python3.8" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_python2.7</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=5995&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/python-xapian-feedstock?branchName=master&jobName=osx&configuration=osx_python2.7" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_python3.6</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=5995&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/python-xapian-feedstock?branchName=master&jobName=osx&configuration=osx_python3.6" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_python3.7</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=5995&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/python-xapian-feedstock?branchName=master&jobName=osx&configuration=osx_python3.7" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_python3.8</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=5995&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/python-xapian-feedstock?branchName=master&jobName=osx&configuration=osx_python3.8" alt="variant">
                 </a>
               </td>
             </tr>
@@ -72,21 +114,20 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-python--xapian-green.svg)](https://anaconda.org/conda-forge/python-xapian) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/python-xapian.svg)](https://anaconda.org/conda-forge/python-xapian) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/python-xapian.svg)](https://anaconda.org/conda-forge/python-xapian) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/python-xapian.svg)](https://anaconda.org/conda-forge/python-xapian) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-xapian--core-green.svg)](https://anaconda.org/conda-forge/xapian-core) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/xapian-core.svg)](https://anaconda.org/conda-forge/xapian-core) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/xapian-core.svg)](https://anaconda.org/conda-forge/xapian-core) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/xapian-core.svg)](https://anaconda.org/conda-forge/xapian-core) |
 
-Installing xapian
-=================
+Installing python-xapian
+========================
 
-Installing `xapian` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `python-xapian` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
 ```
 
-Once the `conda-forge` channel has been enabled, `python-xapian, xapian-core` can be installed with:
+Once the `conda-forge` channel has been enabled, `python-xapian` can be installed with:
 
 ```
-conda install python-xapian xapian-core
+conda install python-xapian
 ```
 
 It is possible to list all of the versions of `python-xapian` available on your platform with:
@@ -134,17 +175,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating xapian-feedstock
-=========================
+Updating python-xapian-feedstock
+================================
 
-If you would like to improve the xapian recipe or build a new
+If you would like to improve the python-xapian recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/xapian-feedstock are
+Note that all branches in the conda-forge/python-xapian-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
