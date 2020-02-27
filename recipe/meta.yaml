@@ -59,9 +59,9 @@ outputs:
       run:
         - python
         - xapian-core ={{ version }}
-      files: ${SP_DIR}/xapian/
-      test:
-        imports: xapian
+    files: ${SP_DIR}/xapian/
+    test:
+      imports: xapian
 
 about:
   home: http://xapian.org
