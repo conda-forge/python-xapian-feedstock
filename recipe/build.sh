@@ -1,4 +1,4 @@
-set -xueo -pipefail
+set -xue
 
 # Build xapian-core component
 
