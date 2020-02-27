@@ -7,7 +7,7 @@ Package license: GPL-2.0+
 
 Feedstock license: BSD 3-Clause
 
-Summary: Xapian is an Open Source Search Engine Library, written in C++.
+Summary: C++ Core and Python Bindings for the Xapian Open Source Search Engine Library.
 
 Xapian is an Open Source search engine library which allows developers
 to add advanced indexing and search facilities to their own applications.
