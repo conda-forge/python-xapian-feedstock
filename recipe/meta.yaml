@@ -17,15 +17,19 @@ build:
   number: 1
   skip: true  # [win]
 
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+  host:
+    - zlib
+
 outputs:
   - name: xapian-core
     requirements:
-      build:
-        - {{ compiler('cxx') }}
       host:
         - zlib
     files:
-      - bin/xapian-*
+      - bin/xapian*
       - bin/simpleindex
       - bin/simplesearch
       - bin/copydatabase
@@ -40,22 +44,20 @@ outputs:
       - share/aclocal/xapian.m4
       - share/xapian-core/
     run_exports:
-      - {{ pin_subpackage('xapian-core', exact=True) }}
+      - {{ pin_subpackage('xapian-core') }}
     test:
       commands:
         - xapian-config --cxxflags --libs
 
   - name: python-xapian
     requirements:
-      build:
-        - {{ compiler('cxx') }}
       host:
-        - python
-        - pip
+        - python {{ python }}
         - zlib
+        - sphinx  # required even with --disable-documentation  :-/
       run:
-        - python
-        - xapian-core ={{ version }}
+        - python {{ python }}
+        - {{ pin_subpackage('xapian-core', exact=True) }}
     files:
       - ${SP_DIR}/xapian/
     test:
