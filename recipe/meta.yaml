@@ -24,11 +24,11 @@ requirements:
     - pip
     - sphinx  # TODO: this shouldn't be needed, but there's no way to disable it in configure
     - zlib
-    - {{ pin_subpackage('xapian-core', exact=True) }}
+    - xapian-core ={{ version }}
 
   run:
     - python
-    - {{ pin_subpackage('xapian-core', exact=True) }}
+    - xapian-core ={{ version }}
 
 test:
   imports:
