@@ -1,11 +1,8 @@
-set -xue
+set -xe
 
 # Build xapian-core component
 
-pwd
-ls
-ls xapian-core
-cd xapian-core/
+cd ${SRC_DIR}/xapian-core
 LDFLAGS=${LDFLAGS} \
 ./configure \
     CXXFLAGS=-I${PREFIX}/include \
@@ -36,8 +33,7 @@ else
     PYTHON3=
 fi
 
-ls xapian-bindings
-cd ../xapian-bindings
+cd ${SRC_DIR}/xapian-bindings
 PYTHON2=$PYTHON2 PYTHON3=$PYTHON3 \
 LDFLAGS=$LDFLAGS \
 ./configure \
