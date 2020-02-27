@@ -2,6 +2,9 @@ set -xe
 
 # Build xapian-core component
 
+# We get an error otherwise (bug in conda-build?)
+cp ${SRC_DIR}/xapian-core/COPYING ${SRC_DIR}
+
 cd ${SRC_DIR}/xapian-core
 LDFLAGS=${LDFLAGS} \
 ./configure \

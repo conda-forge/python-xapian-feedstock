@@ -17,17 +17,16 @@ build:
   number: 1
   skip: true  # [win]
 
+# Note: these should be in the per-output reqs, but that doesn't work at the moment
 requirements:
   build:
     - {{ compiler('cxx') }}
   host:
     - zlib
+    - sphinx  # required even with --disable-documentation  :-/
 
 outputs:
   - name: xapian-core
-    requirements:
-      host:
-        - zlib
     files:
       - bin/xapian*
       - bin/simpleindex
@@ -52,14 +51,12 @@ outputs:
   - name: python-xapian
     requirements:
       host:
-        - python {{ python }}
-        - zlib
-        - sphinx  # required even with --disable-documentation  :-/
+        - python
       run:
-        - python {{ python }}
+        - python
         - {{ pin_subpackage('xapian-core', exact=True) }}
     files:
-      - ${SP_DIR}/xapian/
+      - lib/python{{ python }}/site-packages/xapian/
     test:
       imports:
         - xapian
