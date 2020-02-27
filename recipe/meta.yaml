@@ -11,7 +11,7 @@ source:
 
   - url: https://oligarchy.co.uk/xapian/{{ version }}/xapian-bindings-{{ version }}.tar.xz
     sha256: 68441612d87904a49066e5707a42cde171e4d423bf8ad23f3f6c04b8a9b2c40c
-    folder: python-xapian
+    folder: xapian-bindings
 
 build:
   number: 1
