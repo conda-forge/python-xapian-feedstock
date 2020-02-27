@@ -1,8 +1,7 @@
-{% set name = "xapian" %}
 {% set version = "1.4.15" %}
 
 package:
-  name: {{ name }}
+  name: xapian
   version: {{ version }}
 
 source:
@@ -20,7 +19,6 @@ build:
 
 outputs:
   - name: xapian-core
-    version: {{ version }}
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -41,27 +39,28 @@ outputs:
       - lib/pkgconfig/xapian-core.pc
       - share/aclocal/xapian.m4
       - share/xapian-core/
-    run_exports: {{ pin_subpackage('xapian-core', exact=True) }}
+    run_exports:
+      - {{ pin_subpackage('xapian-core', exact=True) }}
     test:
-      commands: xapian-config --cxxflags --libs
+      commands:
+        - xapian-config --cxxflags --libs
 
   - name: python-xapian
-    version: {{ version }}
     requirements:
       build:
         - {{ compiler('cxx') }}
       host:
         - python
         - pip
-        # - sphinx  # TODO: shouldn't be needed, but there's no way to disable it in configure
         - zlib
-        # xapian-core is built before bindings, thus should be present
       run:
         - python
         - xapian-core ={{ version }}
-    files: ${SP_DIR}/xapian/
+    files:
+      - ${SP_DIR}/xapian/
     test:
-      imports: xapian
+      imports:
+        - xapian
 
 about:
   home: http://xapian.org
