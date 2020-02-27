@@ -1,24 +1,44 @@
-set -xu
+set -xueo -pipefail
+
+# Build xapian-core component
+
+cd ${SRC_DIR}/xapian-core/xapian-core-${PKG_VERSION}
+LDFLAGS=${LDFLAGS} \
+./configure \
+    CXXFLAGS=-I${PREFIX}/include \
+    --enable-shared \
+    --enable-static \
+    --disable-documentation \
+    --prefix=${PREFIX}
+
+make -j ${CPU_COUNT}
+make install prefix=${PREFIX}
+
+# For debugging / tracking of new components
+ls ${PREFIX}
+ls ${PREFIX}/bin
+ls ${PREFIX}/lib
+ls ${PREFIX}/include
+ls ${PREFIX}/share
+
+# Build python-xapian component
 
 if [[ ${PY3K} == "1" ]]; then
     PYFLAG="--with-python3"
     PYTHON2=
-    PYTHON3=$PYTHON
+    PYTHON3=${PYTHON}
 else
     PYFLAG="--with-python"
-    PYTHON2=$PYTHON
+    PYTHON2=${PYTHON}
     PYTHON3=
 fi
 
-$PREFIX/bin/xapian-config --version
-$PREFIX/bin/xapian-config --cxxflags
-$PREFIX/bin/xapian-config --libs
-$PREFIX/bin/xapian-config --ltlibs
-
+cd ${SRC_DIR}/python-xapian/xapian-bindings-${PKG_VERSION}
 PYTHON2=$PYTHON2 PYTHON3=$PYTHON3 \
 LDFLAGS=$LDFLAGS \
 ./configure \
-    CPPFLAGS=-I$PREFIX/include \
+    CPPFLAGS=-I${PREFIX}/include \
+    XAPIAN_CONFIG=${PREFIX}/bin/xapian-config \
     --without-php \
     --without-php7 \
     --without-ruby \
@@ -28,9 +48,8 @@ LDFLAGS=$LDFLAGS \
     --without-perl \
     --without-lua \
     --disable-documentation \
-    $PYFLAG \
-    --prefix=$PREFIX
+    ${PYFLAG} \
+    --prefix=${PREFIX}
 
-make && make install
-rm -rf $PREFIX/share/doc/xapian-bindings
-
+make -j ${CPU_COUNT}
+make install prefix=${PREFIX}
