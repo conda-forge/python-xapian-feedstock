@@ -12,7 +12,7 @@ source:
     - configure_xapian-config_replace_--ltlibs_with_--libs.patch
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win]
 
 requirements:

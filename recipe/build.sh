@@ -4,10 +4,14 @@ if [[ ${PY3K} == "1" ]]; then
     PYFLAG="--with-python3"
     PYTHON2=
     PYTHON3=${PYTHON}
+    TEST_DIR="${SRC_DIR}/python3"
+    EXAMPLES_DIR="${PREFIX}/share/doc/xapian-bindings/python3/examples"
 else
     PYFLAG="--with-python"
     PYTHON2=${PYTHON}
     PYTHON3=
+    TEST_DIR="${SRC_DIR}/python"
+    EXAMPLES_DIR="${PREFIX}/share/doc/xapian-bindings/python/examples"
 fi
 
 PYTHON2=${PYTHON2} PYTHON3=${PYTHON3} \
@@ -27,3 +31,10 @@ LDFLAGS=${LDFLAGS} \
 
 make -j ${CPU_COUNT}
 make install prefix=${PREFIX}
+
+# For our run_test.sh script
+mkdir -p ${EXAMPLES_DIR}/test
+cp ${TEST_DIR}/testsuite.py ${EXAMPLES_DIR}/test/
+cp ${TEST_DIR}/smoketest.py ${EXAMPLES_DIR}/test/
+cp ${TEST_DIR}/test_xapian_star.py ${EXAMPLES_DIR}/test/
+cp ${TEST_DIR}/pythontest.py ${EXAMPLES_DIR}/test/
