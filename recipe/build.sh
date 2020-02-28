@@ -1,17 +1,17 @@
 set -xe
 
-if [[ ${PY3K} == "1" ]]; then
-    PYFLAG="--with-python3"
-    PYTHON2=
-    PYTHON3=${PYTHON}
-    TEST_DIR="${SRC_DIR}/python3"
-    EXAMPLES_DIR="${PREFIX}/share/doc/xapian-bindings/python3/examples"
-else
+if [[ ${PY_VER} == "2.7" ]]; then
     PYFLAG="--with-python"
     PYTHON2=${PYTHON}
     PYTHON3=
     TEST_DIR="${SRC_DIR}/python"
     EXAMPLES_DIR="${PREFIX}/share/doc/xapian-bindings/python/examples"
+else
+    PYFLAG="--with-python3"
+    PYTHON2=
+    PYTHON3=${PYTHON}
+    TEST_DIR="${SRC_DIR}/python3"
+    EXAMPLES_DIR="${PREFIX}/share/doc/xapian-bindings/python3/examples"
 fi
 
 PYTHON2=${PYTHON2} PYTHON3=${PYTHON3} \

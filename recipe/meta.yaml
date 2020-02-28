@@ -22,7 +22,7 @@ requirements:
   host:
     - python
     - pip
-    - sphinx  # TODO: this shouldn't be needed, but there's no way to disable it in configure
+    - sphinx
     - {{ pin_compatible('xapian-core', max_pin='x.x.x') }}
 
   run:
