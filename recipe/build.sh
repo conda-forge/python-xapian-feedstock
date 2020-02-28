@@ -22,7 +22,6 @@ LDFLAGS=${LDFLAGS} \
     --without-java \
     --without-perl \
     --without-lua \
-    --disable-documentation \
     $PYFLAG \
     --prefix=${PREFIX}
 

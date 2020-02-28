@@ -12,7 +12,7 @@ source:
     - configure_xapian-config_replace_--ltlibs_with_--libs.patch
 
 build:
-  number: 1
+  number: 3
   skip: true  # [win]
 
 requirements:
@@ -23,12 +23,10 @@ requirements:
     - python
     - pip
     - sphinx  # TODO: this shouldn't be needed, but there's no way to disable it in configure
-    - zlib
-    - xapian-core ={{ version }}
+    - {{ pin_compatible('xapian-core', max_pin='x.x.x') }}
 
   run:
     - python
-    - xapian-core ={{ version }}
 
 test:
   imports:
