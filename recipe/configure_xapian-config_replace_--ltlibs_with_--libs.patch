@@ -1,0 +1,28 @@
+diff --git a/configure b/configure
+index d693101..b896347 100755
+--- a/configure
++++ b/configure
+@@ -16443,7 +16443,7 @@ fi
+     { $as_echo "$as_me:${as_lineno-$LINENO}: checking $XAPIAN_CONFIG works" >&5
+ $as_echo_n "checking $XAPIAN_CONFIG works... " >&6; }
+ 
+-        if (exec >&5 2>&5 ; $XAPIAN_CONFIG --ltlibs --cxxflags; exit $?) then
++        if (exec >&5 2>&5 ; $XAPIAN_CONFIG --libs --cxxflags; exit $?) then
+       { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+ $as_echo "yes" >&6; }
+     else
+@@ -16458,12 +16458,12 @@ $as_echo "yes" >&6; }
+ 	as_fn_error $? "'$XAPIAN_CONFIG' not executable, aborting" "$LINENO" 5
+ 	;;
+       esac
+-      as_fn_error $? "'$XAPIAN_CONFIG --ltlibs --cxxflags' doesn't work, aborting" "$LINENO" 5
++      as_fn_error $? "'$XAPIAN_CONFIG --libs --cxxflags' doesn't work, aborting" "$LINENO" 5
+     fi
+ 
+     XAPIAN_VERSION=`$XAPIAN_CONFIG --version|sed 's/.* //;s/_.*$//'`
+     XAPIAN_CXXFLAGS=`$XAPIAN_CONFIG --cxxflags`
+-    XAPIAN_LIBS=`$XAPIAN_CONFIG --ltlibs`
++    XAPIAN_LIBS=`$XAPIAN_CONFIG --libs`
+     :
+   fi
+ 

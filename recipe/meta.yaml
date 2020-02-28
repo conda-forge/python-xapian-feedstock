@@ -1,17 +1,19 @@
 {% set name = "python-xapian" %}
-{% set version = "1.4.14" %}
+{% set version = "1.4.15" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://oligarchy.co.uk/xapian/{{ version }}/xapian-bindings-{{ version }}.tar.xz
-  sha256: 5609d5680650d8a424683eb3fe3239dc8468341cabe0861e7be5018b383b6161
+  sha256: 68441612d87904a49066e5707a42cde171e4d423bf8ad23f3f6c04b8a9b2c40c
+  patches:
+    - configure_xapian-config_replace_--ltlibs_with_--libs.patch
 
 build:
-  number: 0
-  skip: True  # [win]
+  number: 1
+  skip: true  # [win]
 
 requirements:
   build:
@@ -21,11 +23,12 @@ requirements:
     - python
     - pip
     - sphinx  # TODO: this shouldn't be needed, but there's no way to disable it in configure
-    - xapian-core {{ version }}
     - zlib
+    - xapian-core ={{ version }}
 
   run:
     - python
+    - xapian-core ={{ version }}
 
 test:
   imports:
