@@ -23,7 +23,7 @@ requirements:
     - python
     - pip
     - sphinx
-    - {{ pin_compatible('xapian-core', min_pin='x.x.x', max_pin='x.x.x') }}
+    - xapian-core {{ version }}
 
   run:
     - python
