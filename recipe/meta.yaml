@@ -1,5 +1,5 @@
 {% set name = "python-xapian" %}
-{% set version = "1.4.15" %}
+{% set version = "1.4.16" %}
 
 package:
   name: {{ name }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://oligarchy.co.uk/xapian/{{ version }}/xapian-bindings-{{ version }}.tar.xz
-  sha256: 68441612d87904a49066e5707a42cde171e4d423bf8ad23f3f6c04b8a9b2c40c
+  sha256: 8791ec6d15cdd2fa065e414033d0b1cd5cf61916fdb47ae5d36c3dfe69be621b
   patches:
     - configure_xapian-config_replace_--ltlibs_with_--libs.patch
 
 build:
-  number: 5
+  number: 0
   skip: true  # [win]
 
 requirements:
@@ -23,7 +23,7 @@ requirements:
     - python
     - pip
     - sphinx
-    - {{ pin_compatible('xapian-core', max_pin='x.x.x') }}
+    - xapian-core {{ version }}
 
   run:
     - python
@@ -34,7 +34,7 @@ test:
 
 about:
   home: http://xapian.org
-  license: GPL-2.0+
+  license: GPL-2.0-or-later
   license_family: GPL
   license_file: COPYING
   summary: Python bindings for the Xapian Search Engine Library.
