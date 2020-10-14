@@ -5,9 +5,13 @@ Home: http://xapian.org
 
 Package license: GPL-2.0-or-later
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/python-xapian-feedstock/blob/master/LICENSE.txt)
 
 Summary: Python bindings for the Xapian Search Engine Library.
+
+Development: https://xapian.org/bleeding
+
+Documentation: https://xapian.org/docs/bindings/
 
 Xapian is an Open Source search engine library which allows developers
 to add advanced indexing and search facilities to their own applications.
@@ -54,6 +58,13 @@ Current build status
                 </a>
               </td>
             </tr><tr>
+              <td>linux_64_python3.9.____cpythonpython_implcpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=5995&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/python-xapian-feedstock?branchName=master&jobName=linux&configuration=linux_64_python3.9.____cpythonpython_implcpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
               <td>osx_64_python3.6.____cpythonpython_implcpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=5995&branchName=master">
@@ -72,6 +83,13 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=5995&branchName=master">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/python-xapian-feedstock?branchName=master&jobName=osx&configuration=osx_64_python3.8.____cpythonpython_implcpython" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_64_python3.9.____cpythonpython_implcpython</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=5995&branchName=master">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/python-xapian-feedstock?branchName=master&jobName=osx&configuration=osx_64_python3.9.____cpythonpython_implcpython" alt="variant">
                 </a>
               </td>
             </tr>
