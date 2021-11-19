@@ -12,7 +12,7 @@ source:
     - configure_xapian-config_replace_--ltlibs_with_--libs.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [win or python_impl == 'pypy']
 
 requirements:
@@ -23,7 +23,6 @@ requirements:
     - python
     - pip
     - sphinx
-    - docutils ==0.17.1  # [py==310]
     - sphinx >=4.2.0  # [py==310]
     - xapian-core {{ version }}
 
