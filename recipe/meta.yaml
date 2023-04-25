@@ -8,8 +8,6 @@ package:
 source:
   url: https://oligarchy.co.uk/xapian/{{ version }}/xapian-bindings-{{ version }}.tar.xz
   sha256: 6b5454833ac52a3e32c0bb3a7290a5a2b50488d8918f2a45269557e4de9a31e5
-  patches:
-    - configure_xapian-config_replace_--ltlibs_with_--libs.patch
 
 build:
   number: 0
