@@ -1,5 +1,5 @@
 {% set name = "python-xapian" %}
-{% set version = "1.4.19" %}
+{% set version = "1.4.22" %}
 
 package:
   name: {{ name }}
@@ -7,9 +7,7 @@ package:
 
 source:
   url: https://oligarchy.co.uk/xapian/{{ version }}/xapian-bindings-{{ version }}.tar.xz
-  sha256: 91c385a48951aa7cdf665effd25533f7477fc22781ca712e50b5496459a2883d
-  patches:
-    - configure_xapian-config_replace_--ltlibs_with_--libs.patch
+  sha256: 6b5454833ac52a3e32c0bb3a7290a5a2b50488d8918f2a45269557e4de9a31e5
 
 build:
   number: 1
