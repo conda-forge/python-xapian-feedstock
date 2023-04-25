@@ -14,6 +14,8 @@ else
     EXAMPLES_DIR="${PREFIX}/share/doc/xapian-bindings/python3/examples"
 fi
 
+sed -i.backup 's/--ltlibs/--libs/g' configure
+
 PYTHON2=${PYTHON2} PYTHON3=${PYTHON3} \
 LDFLAGS=${LDFLAGS} \
 ./configure \
