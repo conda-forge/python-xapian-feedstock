@@ -1,11 +1,11 @@
-About python-xapian
-===================
+About python-xapian-feedstock
+=============================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/python-xapian-feedstock/blob/main/LICENSE.txt)
 
 Home: http://xapian.org
 
 Package license: GPL-2.0-or-later
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/python-xapian-feedstock/blob/main/LICENSE.txt)
 
 Summary: Python bindings for the Xapian Search Engine Library.
 
