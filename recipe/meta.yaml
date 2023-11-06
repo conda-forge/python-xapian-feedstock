@@ -1,5 +1,5 @@
 {% set name = "python-xapian" %}
-{% set version = "1.4.23" %}
+{% set version = "1.4.24" %}
 
 package:
   name: {{ name }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://oligarchy.co.uk/xapian/{{ version }}/xapian-bindings-{{ version }}.tar.xz
-  sha256: e0bc8cc0ecf0568549c50b51fd59e4cffb5318d6f202afcd4465855ef5f33f7d
+  sha256: 513d578488279198ace13ad497510d2b22204d5d794b64143d05b7be974eb6cf
 
 build:
-  number: 1
+  number: 0
   skip: true  # [win or python_impl == 'pypy']
 
 requirements:
