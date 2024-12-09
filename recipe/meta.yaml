@@ -22,6 +22,7 @@ requirements:
   host:
     - python
     - pip
+    - setuptools
     - sphinx
     - sphinx >=4.2.0  # [py==310]
     - xapian-core {{ version }}
