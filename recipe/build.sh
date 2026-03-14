@@ -19,7 +19,9 @@ sed -i.backup 's/--ltlibs/--libs/g' configure
 PYTHON2=${PYTHON2} PYTHON3=${PYTHON3} \
 LDFLAGS=${LDFLAGS} \
 ./configure \
+    XAPIAN_CONFIG="${PREFIX}/bin/xapian-config" \
     CPPFLAGS=-I${PREFIX}/include \
+    LDFLAGS="-L${PREFIX}/lib" \
     --without-php \
     --without-php7 \
     --without-ruby \
