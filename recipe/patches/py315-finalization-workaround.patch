@@ -1,0 +1,57 @@
+From: conda-forge
+Subject: [PATCH] python: don't release GIL during interpreter finalization
+
+Python 3.15 tightened interpreter finalization and thread-state handling.
+SWIG-generated destructors can invoke XapianSWIG_Python_Thread_Allow while
+Python is already finalizing.  Calling PyEval_SaveThread() in that state
+can result in a fatal error such as:
+
+    PyMutex_Unlock: unlocking mutex that is not locked
+    Python runtime state: finalizing
+
+There is no benefit to releasing the GIL while deleting these wrapper
+objects during interpreter shutdown, so keep the current thread state
+attached once finalization has started.
+
+Py_IsFinalizing() is public since Python 3.13.  Limit the workaround to
+Python 3.15+, where the problem is observed.
+
+Patch both the SWIG input and the generated wrapper, since release
+tarballs build the pre-generated xapian_wrap.cc without requiring SWIG.
+
+--- a/python3/python.i
++++ b/python3/python.i
+@@ -107,6 +107,15 @@ class XapianSWIG_Python_Thread_Allow {
+     bool status;
+   public:
+     XapianSWIG_Python_Thread_Allow() : status(true) {
++#if PY_VERSION_HEX >= 0x030f0000
++        // Don't detach the thread state once interpreter finalization has
++        // started.  In Python 3.15, doing so while SWIG proxy objects are
++        // being destroyed during shutdown can corrupt runtime lock state.
++        if (Py_IsFinalizing()) {
++            status = false;
++            return;
++        }
++#endif
+ #if PY_VERSION_HEX < 0x03070000
+         // Since 3.7, Python initialises the GIL in PyInitialize() so
+         // PyEval_ThreadsInitialized() is no longer useful and was
+--- a/python3/xapian_wrap.cc
++++ b/python3/xapian_wrap.cc
+@@ -81,6 +81,15 @@ class XapianSWIG_Python_Thread_Allow {
+     bool status;
+   public:
+     XapianSWIG_Python_Thread_Allow() : status(true) {
++#if PY_VERSION_HEX >= 0x030f0000
++        // Don't detach the thread state once interpreter finalization has
++        // started.  In Python 3.15, doing so while SWIG proxy objects are
++        // being destroyed during shutdown can corrupt runtime lock state.
++        if (Py_IsFinalizing()) {
++            status = false;
++            return;
++        }
++#endif
+ #if PY_VERSION_HEX < 0x03070000
+         // Since 3.7, Python initialises the GIL in PyInitialize() so
+         // PyEval_ThreadsInitialized() is no longer useful and was
