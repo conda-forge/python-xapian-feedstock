@@ -8,9 +8,11 @@ package:
 source:
   url: https://oligarchy.co.uk/xapian/{{ version }}/xapian-bindings-{{ version }}.tar.xz
   sha256: f52ec189f13b4fa66ea625a6eb94bb32dd651b9ec806be6a911dda54cbe3875c
+  patches:
+    - patches/py315-finalization-workaround.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win or python_impl == 'pypy']
 
 requirements:
@@ -24,7 +26,6 @@ requirements:
     - pip
     - setuptools
     - sphinx
-    - sphinx >=4.2.0  # [py==310]
     - xapian-core {{ version }}
 
   run:
@@ -33,6 +34,10 @@ requirements:
 test:
   imports:
     - xapian
+  commands:
+    # Keep an owning SWIG proxy alive until interpreter shutdown, to check if
+    # finalization works correctly in Python 3.15.
+    - python -c "import xapian; query = xapian.Query('shutdown-finalization-test')"
 
 about:
   home: http://xapian.org
