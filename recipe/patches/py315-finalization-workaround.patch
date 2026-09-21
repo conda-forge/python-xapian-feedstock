@@ -1,57 +1,39 @@
 From: conda-forge
-Subject: [PATCH] python: don't release GIL during interpreter finalization
+Subject: [PATCH] python: fix SWIG director mutex operations
 
-Python 3.15 tightened interpreter finalization and thread-state handling.
-SWIG-generated destructors can invoke XapianSWIG_Python_Thread_Allow while
-Python is already finalizing.  Calling PyEval_SaveThread() in that state
-can result in a fatal error such as:
+The pregenerated Python wrapper for 2.1.0 was produced by SWIG 4.3.0, which
+emits the wrong operations for its director mutex: `Mutex::~Mutex()` releases
+(unlocks) the lock, while Mutex::Unlock() frees it.  These operations are
+reversed.  SWIG 4.4.0 corrects them so Unlock() releases the lock and the
+destructor frees it.
 
-    PyMutex_Unlock: unlocking mutex that is not locked
-    Python runtime state: finalizing
+With the incorrect sequence in place, at process exit, the destructor of the
+static director mutex consequently calls PyThread_release_lock() on a released
+lock.  Python 3.15 diagnoses this as a fatal PyMutex_Unlock error during
+interpreter finalization.
 
-There is no benefit to releasing the GIL while deleting these wrapper
-objects during interpreter shutdown, so keep the current thread state
-attached once finalization has started.
+TODO: remove the patch once upstream sources are generated with SWIG 4.4.0
+or later.
 
-Py_IsFinalizing() is public since Python 3.13.  Limit the workaround to
-Python 3.15+, where the problem is observed.
-
-Patch both the SWIG input and the generated wrapper, since release
-tarballs build the pre-generated xapian_wrap.cc without requiring SWIG.
-
---- a/python3/python.i
-+++ b/python3/python.i
-@@ -107,6 +107,15 @@ class XapianSWIG_Python_Thread_Allow {
-     bool status;
-   public:
-     XapianSWIG_Python_Thread_Allow() : status(true) {
-+#if PY_VERSION_HEX >= 0x030f0000
-+        // Don't detach the thread state once interpreter finalization has
-+        // started.  In Python 3.15, doing so while SWIG proxy objects are
-+        // being destroyed during shutdown can corrupt runtime lock state.
-+        if (Py_IsFinalizing()) {
-+            status = false;
-+            return;
-+        }
-+#endif
- #if PY_VERSION_HEX < 0x03070000
-         // Since 3.7, Python initialises the GIL in PyInitialize() so
-         // PyEval_ThreadsInitialized() is no longer useful and was
 --- a/python3/xapian_wrap.cc
 +++ b/python3/xapian_wrap.cc
-@@ -76,6 +76,15 @@ class XapianSWIG_Python_Thread_Allow {
-     bool status;
-   public:
-     XapianSWIG_Python_Thread_Allow() : status(true) {
-+#if PY_VERSION_HEX >= 0x030f0000
-+        // Don't detach the thread state once interpreter finalization has
-+        // started.  In Python 3.15, doing so while SWIG proxy objects are
-+        // being destroyed during shutdown can corrupt runtime lock state.
-+        if (Py_IsFinalizing()) {
-+            status = false;
-+            return;
-+        }
-+#endif
- #if PY_VERSION_HEX < 0x03070000
-         // Since 3.7, Python initialises the GIL in PyInitialize() so
-         // PyEval_ThreadsInitialized() is no longer useful and was
+@@ -3574,17 +3574,17 @@ namespace Swig {
+            mutex_ = PyThread_allocate_lock();
+        }
+ 
+        ~Mutex() {
+-           PyThread_release_lock(mutex_);
++           PyThread_free_lock(mutex_);
+        }
+ 
+    private:
+        void Lock() {
+            PyThread_acquire_lock(mutex_, WAIT_LOCK);
+        }
+ 
+        void Unlock() {
+-           PyThread_free_lock(mutex_);
++           PyThread_release_lock(mutex_);
+        }
+ 
+        PyThread_type_lock mutex_;
