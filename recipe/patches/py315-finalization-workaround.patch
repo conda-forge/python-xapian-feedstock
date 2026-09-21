@@ -39,7 +39,7 @@ tarballs build the pre-generated xapian_wrap.cc without requiring SWIG.
          // PyEval_ThreadsInitialized() is no longer useful and was
 --- a/python3/xapian_wrap.cc
 +++ b/python3/xapian_wrap.cc
-@@ -81,6 +81,15 @@ class XapianSWIG_Python_Thread_Allow {
+@@ -76,6 +76,15 @@ class XapianSWIG_Python_Thread_Allow {
      bool status;
    public:
      XapianSWIG_Python_Thread_Allow() : status(true) {
